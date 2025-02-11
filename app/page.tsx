@@ -4,6 +4,7 @@ import { useState } from "react";
 import BrightnessAdjustment from "../components/BrightnessAdjustment";
 import ColorCorrection from "../components/ColorCorrection";
 import ImageBlurring from "../components/ImageBlurring";
+import ImageBlending from "@/components/ImageBlending";
 
 export default function MathVisualizer() {
   const [selectedOption, setSelectedOption] = useState("Brightness");
@@ -54,12 +55,25 @@ export default function MathVisualizer() {
         >
           Image Blurring
         </button>
+        <button
+          className={`py-1 px-3 rounded-full ${selectedOption === "blending" ? "bg-blue-500" : "bg-gray-700"
+            }`}
+          onClick={() => setSelectedOption("blending")}
+        >
+          Image Blending
+        </button>
+
+
+
+
+
       </div>
 
       <div className="mt-12 space-y-12">
         {selectedOption === "Brightness" && <BrightnessAdjustment image={imageBase64} />}
         {selectedOption === "Color" && <ColorCorrection image={imageBase64} />}
         {selectedOption === "Blur" && <ImageBlurring image={imageBase64} />}
+        {selectedOption === "blending" && <ImageBlending image={imageBase64} />}
       </div>
     </div>
   );
