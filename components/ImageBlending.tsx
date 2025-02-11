@@ -12,11 +12,11 @@ export default function ImageBlending(image: any) {
   useEffect(() => {
     const img1 = new Image()
     const img2 = new Image()
-    img1.src = "/gopher.jpg"
-    img2.src = image.image || "/vercel.svg"
+    img1.src = image.image || "/gopher.jpg"
+    img2.src = imageBase64 || "/vercel.svg"
     img1.onload = () => setImage1(img1)
     img2.onload = () => setImage2(img2)
-  }, [])
+  }, [imageBase64])
 
   useEffect(() => {
     if (image1 && image2) {
@@ -80,19 +80,25 @@ export default function ImageBlending(image: any) {
         />
       </div>
       <h2 className="text-2xl font-semibold mb-4">4. Image Blending</h2>
-      <div className="flex items-center space-x-4">
-        <canvas ref={canvasRef} className="border border-gray-300" width="200" height="200" />
-        <div>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={blendFactor}
-            onChange={(e) => setBlendFactor(Number.parseFloat(e.target.value))}
-            className="w-48"
+      <div className="flex flex-row justify-center items-center gap-8">
+
+        <div className="flex items-center space-x-4">
+          <canvas ref={canvasRef}
+            className="border border-gray-300 rounded-md shadow-sm w-64 h-64"
+
           />
-          <p>Blend Factor (α): {blendFactor.toFixed(2)}</p>
+          <div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={blendFactor}
+              onChange={(e) => setBlendFactor(Number.parseFloat(e.target.value))}
+              className="w-48"
+            />
+            <p>Blend Factor (α): {blendFactor.toFixed(2)}</p>
+          </div>
         </div>
       </div>
       <div className="mt-4">
